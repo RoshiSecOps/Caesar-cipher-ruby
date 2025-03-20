@@ -8,6 +8,16 @@ def cipher_position(position)
   end
 end
 
+def check_case(starting_string, ending_string)
+  starting_string.each do |string_case|
+    if (string_case.is_a?(String) && string_case == string_case.upcase)
+      ending_string[starting_string.index(string_case)] = ending_string[starting_string.index(string_case)].upcase
+    end
+  end
+  return ending_string.join("")
+end
+
+
 def caesar_cipher(cipherstring, position)
 #Create a variable for the alphabet array
   alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -22,8 +32,8 @@ def caesar_cipher(cipherstring, position)
   position = position.to_i
 
 # Split the provided string to check character positions
-  cipherstring = cipherstring.downcase.split("")
-  cipherstring.each do |char|
+  cipherstring_array = cipherstring.downcase.split("")
+  cipherstring_array.each do |char|
     if alphabet.include?("#{char}")
       position_array.push(alphabet.index("#{char}").to_i)
     else
@@ -37,7 +47,7 @@ def caesar_cipher(cipherstring, position)
       ciphered_string_array.push(char)
     end
   end
-  p ciphered_string_array.join("")
+  p check_case(cipherstring.split(""), ciphered_string_array)
 end
 
 caesar_cipher("wHata fak!", 5)
